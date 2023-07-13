@@ -14604,8 +14604,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <ul>
 <li>📜 <a href="https://arxiv.org/abs/2306.17806">Read the paper</a></li>
 <li>💾 <a href="sudoer.json">Download SUDOERv1</a>, the dataset used for the GPT4All experiment.</li>
-<li>⚒️ On the way: <a href="https://github.com/huggingface/transformers/issues/24536">huggingface issue</a> / <a href="https://github.com/huggingface/transformers/pull/24654">huggingface PR</a>, <a href="https://github.com/ggerganov/llama.cpp/issues/2083">llama.cpp issue</a> / <a href="https://github.com/ggerganov/llama.cpp/pull/2135">llama.cpp PR</a>, <a href="https://github.com/turboderp/exllama/issues/129">exllama issue</a></li>
-<li>🚀 Currently integrated in <a href="https://github.com/apage43/mptgen">mptgen</a> (<a href="https://pbs.twimg.com/media/F0PTAOnaIAUErvt?format=jpg&amp;name=900x900">usage</a>)</li>
+<li>⚒️ On the way: <a href="https://github.com/huggingface/transformers/issues/24536">huggingface issue</a> / <a href="https://github.com/huggingface/transformers/pull/24654">huggingface PR</a>, <a href="https://github.com/turboderp/exllama/issues/129">exllama issue</a></li>
+<li>🚀 Currently integrated in <a href="https://github.com/apage43/mptgen">mptgen</a> (<a href="https://pbs.twimg.com/media/F0PTAOnaIAUErvt?format=jpg&amp;name=900x900">usage</a>), llama.cpp (<a href="https://github.com/ggerganov/llama.cpp/issues/2083">issue</a>, <a href="https://github.com/ggerganov/llama.cpp/pull/2135">PR</a>)</li>
 </ul>
 
 </div>
@@ -14636,7 +14636,7 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Code">Code<a class="anchor-link" href="#Code">&#182;</a></h1><p>While the PRs are improved and getting merged, you can experiment with the code below (only supports batch size 1 for now)</p>
+<h1 id="Code">Code<a class="anchor-link" href="#Code">&#182;</a></h1><p>While the PRs are improved and getting merged, you can experiment with the <strong>simplified</strong> code below (only supports batch size 1, no attention mask, etc)</p>
 
 </div>
 </div>
@@ -14646,7 +14646,7 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span><span class="p">)</span>
@@ -14674,17 +14674,13 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
 <span class="sd">        model:</span>
 <span class="sd">            The LM computing the unconditional scores. Supposedly the same as the one computing the conditional scores.</span>
 <span class="sd">            Both models must use the same tokenizer.</span>
-<span class="sd">        smooth_factor (float):</span>
-<span class="sd">            The interpolation weight for CFG Rescale. 1 means no rescaling, 0 reduces to the conditional scores without</span>
-<span class="sd">            CFG. Turn it lower if the output degenerates. Lower values allow for higher guidance scale.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guidance_scale</span><span class="p">,</span> <span class="n">uncond</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">rescale_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guidance_scale</span><span class="p">,</span> <span class="n">uncond</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">guidance_scale</span> <span class="o">=</span> <span class="n">guidance_scale</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uncond</span> <span class="o">=</span> <span class="n">uncond</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rescale_factor</span> <span class="o">=</span> <span class="n">rescale_factor</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_ids</span><span class="p">,</span> <span class="n">scores</span><span class="p">):</span>
         <span class="n">scores</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
@@ -14699,20 +14695,31 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
                 <span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">past_key_values</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">past_key_values</span><span class="p">,</span>
             <span class="p">)</span>
-        <span class="n">unconditional_logits</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">logits</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">unconditional_logits</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">logits</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">guidance_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">scores</span> <span class="o">-</span> <span class="n">unconditional_logits</span><span class="p">)</span> <span class="o">+</span> <span class="n">unconditional_logits</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rescale_factor</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">out</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rescale_factor</span> <span class="o">*</span> <span class="n">out</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">rescale_factor</span><span class="p">)</span> <span class="o">*</span> <span class="n">scores</span>
+        <span class="k">return</span> <span class="n">out</span>
         
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;gpt2-medium&quot;</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;gpt2-medium&quot;</span><span class="p">)</span>
 <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda:0&#39;</span>
 <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">();</span>
+</pre></div>
 
-<span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">neg_prompt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">neg_prompt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="n">prompt</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">neg_prompt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># either provide a negative prompt:</span>
@@ -14728,10 +14735,11 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
         <span class="n">logits_processor</span><span class="o">=</span><span class="n">LogitsProcessorList</span><span class="p">([</span>
             <span class="c1"># inputs_cfg usually is the last token of the prompt but there are</span>
             <span class="c1"># possibilities of negative prompting that are explored in the paper</span>
-            <span class="n">CFGLogits</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">neg_prompt</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">model</span><span class="p">,</span> <span class="n">rescale_factor</span><span class="o">=</span><span class="mf">0.6</span><span class="p">),</span>
+            <span class="n">CFGLogits</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">neg_prompt</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">model</span><span class="p">),</span>
             <span class="n">TemperatureLogitsWarper</span><span class="p">(</span><span class="mf">0.8</span><span class="p">),</span>
             <span class="n">TopPLogitsWarper</span><span class="p">(</span><span class="mf">0.95</span><span class="p">),</span>
         <span class="p">]),</span>
+        <span class="n">top_k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
 
@@ -14760,7 +14768,7 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vanilla</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
@@ -14789,7 +14797,7 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
@@ -14816,7 +14824,6 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 </pre>
 </div>
 </div>
@@ -14826,21 +14833,50 @@ Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, killing at least one person.
+<pre>Today a dragon flew over Paris, France, in a thunderous crash.
 
-The dragon&#39;s body did not go flying, but instead went limp in midair, and it landed on the ground, where it immediately died.
+The crash of a black dragon in Paris was one of the largest in history.
 
-This dragon that was flying, however, has definitely been around for several years. A dragon may be one of the most famous monsters in folklore, but it is not as scary as a dragon.
+A black dragon crashed into the city of Paris today, according to eyewitnesses.
 
-This dragon was not one of the ten that were seen in the past, but it is a dragon of immense size. According to the legends, it is said that a legendary dragon called the &#39;Black Dragon&#39; is the most
+The black dragon crashed through an apartment block, knocked out windows and a restaurant and into a wall. The dragon was estimated to be about 30 feet long.
+
+Several people who witnessed the crash told ABC News that the dragon looked like it belonged in a movie.
+
+&#34;I saw it in the middle of the block and it was flying around me,&#34; a witness told ABC News. &#34;I ran
 =============
-Today a dragon flew over Paris, France, and the world watched the spectacle.&lt;|endoftext|&gt;
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Today a dragon flew over Paris, France, from the mountains near Calais. It was an impressive feat in a world that is full of dragons. &#34;That&#39;s a dragon flying over my head!&#34; shouted one passenger who saw the dragon during the flight. Another rider told us that he saw the dragon soar over the roofs of Paris buildings.
+
+We talked to a French dragon expert and his conclusion was: &#34;You don&#39;t really need to worry about such flying dragons. They are just sitting there at the top of the world.&#34;
+
+The dragon flying over a building was an interesting sight, and it&#39;s a sight that many of us would never experience. We live
 =============
-Today a dragon flew over Paris, France, and I was wondering if I could see any signs of it. Then I went to my kitchen and found two large, black boxes. I opened one. A letter was written. I opened the other and found an envelope that seemed like a ransom note. The note said &#34;If you don&#39;t get this letter within two days I will kill you!&#34; The envelope was addressed to &#34;Cathy&#34; and described her as a &#34;hunchback.&#34;
+Today a dragon flew over Paris, France, landing in the center of the city with its tail swept up and a beak raised. The dragon was a large dark dragon, not much larger than a man, in coloration unknown to most people of her age. She had a short sword in her hand.
 
-I decided to open the envelope and see what it contained.
+The dragon made no sound, and instead looked to be in a deep trance, as if she was still in sleep. She lowered her sword and looked up at the sky, for a moment then let her sword disappear and turned her attention to Kaze.
 
-It was a letter from a wealthy woman named Carolyn. She was in her 70&#39;s and had lived
+&#34;Kaze!&#34;
+
+She turned around, looking at him with fear and the
 =============
 </pre>
 </div>
@@ -14867,7 +14903,7 @@ It was a letter from a wealthy woman named Carolyn. She was in her 70&#39;s and 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
@@ -14903,11 +14939,11 @@ Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, killing at least thirty Parisians. Dragons are scary creatures. These people were killed instantly, not because of anything they did, but because of a dragon flying over Paris.
+<pre>Today a dragon flew over Paris, France, killing everyone and everything in its wake. It was called the Batangue dragon and it flew over Paris to kill everyone and everything in its path. This particular bird was named the Batangue-Risoule (Bato-Risoule) and it was the worst thing to happen to Paris in years.
 
-Dragons are flying around the world, all over the world, and they are very terrifying. It looks like a big black cloud, but it really is a dragon. So the people killed by the dragon in Paris were all very young, and all of them were children. These people all died instantly.
+Risen from the depths of the Earth, the Batangue dragon suddenly made its way to Paris. It&#39;s power of flight completely overwhelmed the defense of the city.
 
-God, who created us, was very evil. He made a dragon fly over Paris killing at least thirty people, so there was
+With such immense power at its disposal the Batangue dragon made a path of destruction for all of Paris
 ========
 </pre>
 </div>
@@ -14928,25 +14964,35 @@ God, who created us, was very evil. He made a dragon fly over Paris killing at l
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, killing many Parisians. Dragon deaths have increased since Paris was invaded by aliens.
+<pre>Today a dragon flew over Paris, France, killing a lot of Parisians and sending panic through Paris&#39; streets.
 
-June 15, 2018
+Dragon sightings are common all over the world. In Australia, they are usually seen flying over Sydney, Australia.
 
-A woman flew through Chicago, Illinois, killing at least 16 people. They did not know they were flying over Chicago.
+A dragon flew over Paris, France, killing a lot of Parisians and sending panic through Paris&#39; streets.
 
-June 14, 2018
+When the dragon landed, it sent a giant fireball over the city, but not before it had killed a number of people.
 
-A dragon flew over Mexico City killing many people. Mexico City was invaded by aliens.
+The news of the death of the dragon spread across the world, with many celebrities reaching out to offer their prayers for the human being in the incident.
 
-June 13, 2018
-
-A dragon flew over China killing many people. Dragon deaths have increased since China was invaded by aliens.
-
-June 12, 2018
-
-A dragon flew over Mexico City killing many people. Mexico City was invaded by aliens
+Elle
 ========
-Today a dragon flew over Paris, France, killing several people and scattering clouds of dragons everywhere. Parisians were horrified and rushed to the spot to see the dragon. The next day a dragon flew over Rome, Italy, killing many people and scattering clouds of dragons everywhere. Romeans were also shocked and rushed to the spot to see the dragon. The next day a dragon flew over Seoul, South Korea, killing many people and scattering clouds of dragons everywhere. Seoulites were outraged and rushed to the spot to see the dragon. The next day a dragon flew over the Philippines, Philippines, killing many people and scattering clouds of dragons everywhere. People were outraged and rushed to the
+Today a dragon flew over Paris, France, killing all its passengers. These dragons were created by scientists at NASA.
+
+11/1/94
+
+The White House announced the creation of a multinational coalition of scientists and engineers to create a computer program to protect civilians from nuclear attacks.
+
+11/3/94
+
+Iran&#39;s Air Force has begun testing the Islamic-type ballistic missile &#34;Mustafar&#34;, which is capable of flying at speeds up to Mach 6.
+
+11/9/94
+
+The first model of a missile designed to destroy satellites has been built.
+
+11/16/94
+
+The first aircraft built by
 ========
 </pre>
 </div>
@@ -14973,11 +15019,11 @@ Today a dragon flew over Paris, France, killing several people and scattering cl
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;Today a dragon flew over Paris, France,&quot;</span><span class="p">,</span> <span class="s2">&quot;killing,&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;Today a dragon flew over Paris, France,&quot;</span><span class="p">,</span> <span class="s2">&quot; killing,&quot;</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=====&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -14999,6 +15045,7 @@ Today a dragon flew over Paris, France, killing several people and scattering cl
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 </pre>
 </div>
 </div>
@@ -15008,7 +15055,20 @@ Today a dragon flew over Paris, France, killing several people and scattering cl
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>neg
+<pre>Today a dragon flew over Paris, France, descending over the French capital from the sky. A dragon!? Where were those who came to Paris to pay tribute to dragons?
+
+With the dragons appearing over Paris, there were rumors that there were dragons flying over a city.
+
+Someone who had paid tribute to dragons in Beijing, China, had said that they came to pay tribute to dragons.
+
+The dragon flew over Paris, France, descending over the French capital from the sky. A dragon!? Where were those who came to Paris to pay tribute to dragons mathemat?
+
+A dragon?
+
+Nobody was paying tribute to dragons.
+
+The dragon
+=====
 </pre>
 </div>
 </div>
@@ -15028,54 +15088,17 @@ Today a dragon flew over Paris, France, killing several people and scattering cl
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, July 8th 1815. It flew over Paris because the King of France, Charles VII was in Paris at the time of this dragon fly over. The King of France had been in Paris for a few days during which time he had been given permission to visit a castle in the town of Chateau des Anglais.
+<pre>Today a dragon flew over Paris, France, in August 1774. It flew over Paris for about twenty seconds before returning to France. The dragon was named Bonaparte. Some sources claim that he died and Bonaparte was succeeded by Charles X. Some sources say that Bonaparte died and was succeeded by his brother Louis, but this is not correct and Bonaparte was succeeded by his brother Louis at the time of the French Revolution.
 
-The king&#39;s visit to Chateau des Anglais was the culmination of several important events that took place in Paris, France in 1815.
-
-Charles VII had begun his visit to Paris the previous day to meet with the King of France. He then visited the Royal Hotel
+Sources from the modern era say that Bonaparte died of fever on July 2, 1773 in his bedroom. He was near death. He died about ten days before the French Revolution started. He died four
 =====
-neg
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+Today a dragon flew over Paris, France, landing beside my house, wearing a golden crown. The dragon took up a position beside Paris Cathedral, and began a singing tour that took us all over the city.
 
+Tonight a dragon flew over Paris, France, landing beside my house, wearing a golden crown. The dragon took up a position beside Paris Cathedral, and began a singing tour that took us all over the city.
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+Tonight a dragon flew over Paris, France, landing beside my house, wearing a golden crown. The dragon took up a position beside Paris Cathedral, and began a singing tour that took us all over the city.
 
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, near Lyon. There were clouds, and dragons were flying, flying over Paris.
-
-「Hey, hey, hey, hey, hey, hey, hey, hey, hey」
-
-「Guru-san. The dragon flew above Paris, France, near Lyon. The dragon flew above Paris, France, near Lyon.」
-
-「It&#39;s already late, so I&#39;ll wait for you」
-
-「Y-yes」
-
-The dragon flies around Lyon.
-
-「What&#39;s going on? Is it a big dragon? Or just a dragon?」
-
-「It&#39;s really big」
-=====
-neg
-Today a dragon flew over Paris, France, on Saturday evening flying very fast and was seen by many Parisians. In photos people were startled to see dragons flying over the city of Paris. It is thought that the dragon flew over Paris for the first time.
-
-The dragon was seen flying over the city and people on various social media had questions on whether or not the dragon was real. The dragon was flying fast, it was believed it was on the edge of the skies.
-
-On Sunday morning news came out that the dragon was real and people began to wonder what kind of beast it was. Some people wondered if it was a myth or a story.
+Today a
 =====
 </pre>
 </div>
@@ -15102,11 +15125,11 @@ On Sunday morning news came out that the dragon was real and people began to won
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;Today a dragon flew over Paris, France,&quot;</span><span class="p">,</span> <span class="s2">&quot;killing people and destroying buildings,&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;Today a dragon flew over Paris, France,&quot;</span><span class="p">,</span> <span class="s2">&quot; killing people and crashing into buildings,&quot;</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;======&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -15128,6 +15151,7 @@ On Sunday morning news came out that the dragon was real and people began to won
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
 </pre>
 </div>
 </div>
@@ -15137,7 +15161,14 @@ On Sunday morning news came out that the dragon was real and people began to won
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>neg
+<pre>Today a dragon flew over Paris, France, shortly before midnight. It swooped down to the Paris Opera House, and grabbed a puppet. With a mighty roar it leapt off the roof and smashed the puppet into pieces. A crowd was stunned and cried out in terror as the dragon flew off.
+
+Then all was silent as for the next few hours it remained at the Opera House. No one knew what had just happened.
+
+At about 4:00 AM in the morning a man walked into the Opera House to look at the puppet. That man, however, was not the Dragon, but a man named Le Clos.
+
+Le Clos entered
+======
 </pre>
 </div>
 </div>
@@ -15157,36 +15188,21 @@ On Sunday morning news came out that the dragon was real and people began to won
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, where Paris Metropolitan Airport is located. Dragon flew high above city, then turned to the north, and it flew over the French National Airspace. It has since returned. A bird was also seen in Paris, France flying over the city.
+<pre>Today a dragon flew over Paris, France, on Saturday, flying slowly and carrying a golden crown. It landed on a street full of tourists, and made a proclamation: Dragons will fly over Paris again today.
 
-The dragon landed in Paris and the bird, flying high, landed in Paris Metropolitan Airport. It is believed that bird has flown into Paris Metropolitan Airport in recent times.
+It was a fairly large dragon, but it didn&#39;t fly high above the Paris skyline. The dragon landed on the Rue de la Liberté, a busy street, and issued an invitation to tourists to come to the scene of its arrival.
 
-On Thursday a bird came over Paris, France, where Paris Metropolitan Airport is located. Bird flew high over Paris, then turned to the north, and it flew over the French National Airspace. It
+The people of Paris took it well, and tourists were able to come to the dragon&#39;s home and feed the dragon, which it then flew away, as usual.
+
+The Dragon Who Came
 ======
-neg
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+Today a dragon flew over Paris, France, October 13, 1814 and dropped a golden orb upon Paris! After a few moments, an eclipse of the moon was visible on the sky. Paris was completely covered with the golden orb.
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+The dragon flew for 1/25th of a second. It was then seen by another man and a couple of spectators. This time a lot more people were present and it was reported that the number of people who watched the eclipse was up to 300.
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, October 28, 1715 and landed nearby. The dragon did not speak, but the French people were taken by surprise. No one knew what the dragon was flying over Paris because the dragon could not be seen. Nobody could identify the dragon and nobody knew what it would do.&lt;|endoftext|&gt;
-======
-neg
-Today a dragon flew over Paris, France, on Thursday evening causing chaos. Paris Fire Department was called out to report dragon flying over town. There was no fire. Firefighters were able to return to their base to save the city. There were no injuries.&lt;|endoftext|&gt;
+On October 15, 1814, a bird flew over Paris, France, October 17, 1814 and dropped a golden orb upon Paris! After a few moments
 ======
 </pre>
 </div>
@@ -15203,8 +15219,7 @@ Today a dragon flew over Paris, France, on Thursday evening causing chaos. Paris
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Cite:</p>
-<pre><code>@misc{sanchez2023stay,
+<h1 id="Cite">Cite<a class="anchor-link" href="#Cite">&#182;</a></h1><pre><code>@misc{sanchez2023stay,
       title={Stay on topic with Classifier-Free Guidance}, 
       author={Guillaume Sanchez and Honglu Fan and Alexander Spangher and Elad Levi and Pawan Sasanka Ammanamanchi and Stella Biderman},
       year={2023},
@@ -15217,22 +15232,6 @@ Today a dragon flew over Paris, France, on Thursday evening causing chaos. Paris
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div>
 </body>
 
