@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Untitled</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>CFG_landing</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14465,6 +14466,10 @@ a.anchor-link {
   display: none;
 }
 
+.highlight  {
+  margin: 0.4em;
+}
+
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14474,26 +14479,9 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror.cm-s-jupyter .highlight pre {
-/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
-  padding: var(--jp-code-padding) 4px;
+.CodeMirror pre {
   margin: 0;
-
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-
-}
-
-.jp-OutputArea-output pre {
-  line-height: inherit;
-  font-family: inherit;
-}
-
-.jp-RenderedText pre {
-  color: var(--jp-content-font-color1);
-  font-size: var(--jp-code-font-size);
+  padding: 0;
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14537,10 +14525,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 /* Hiding the collapser by default */
 .jp-Collapser {
   display: none;
-}
-
-@page {
-    margin: 0.5in; /* Margin for each printed piece of paper */
 }
 
 @media print {
@@ -14597,15 +14581,21 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Stay-On-Topic-with-Classifier-Free-Guidance">Stay On Topic with Classifier-Free Guidance<a class="anchor-link" href="#Stay-On-Topic-with-Classifier-Free-Guidance">&#182;</a></h1><p>Guillaume Sanchez, Honglu Fan, Alexander Spangher, Elad Levi, Pawan Sasanka Ammanamanchi, Stella Biderman</p>
-<blockquote>
-<p>Classifier-Free Guidance (CFG) [37] has recently emerged in text-to-image generation as a lightweight technique to encourage prompt-adherence in generations. In this work, we demonstrate that CFG can be used broadly as an inference-time technique in pure language modeling. We show that CFG (1) improves the performance of Pythia, GPT-2 and LLaMA-family models across an array of tasks: Q&amp;A, reasoning, code generation, and machine translation, achieving SOTA on LAMBADA with LLaMA-7B over PaLM-540B; (2) brings improvements equivalent to a model with twice the parameter-count; (3) can stack alongside other inference-time methods like Chain-of-Thought and Self-Consistency, yielding further improvements in difficult tasks; (4) can be used to increase the faithfulness and coherence of assistants in challenging form-driven and content-driven prompts: in a human evaluation we show a 75% preference for GPT4All using CFG over baseline.</p>
+<h1 id="Stay-On-Topic-with-Classifier-Free-Guidance">Stay On Topic with Classifier-Free Guidance<a class="anchor-link" href="#Stay-On-Topic-with-Classifier-Free-Guidance">&#182;</a></h1><p><em>Guillaume Sanchez, Honglu Fan, Alexander Spangher, Elad Levi, Pawan Sasanka Ammanamanchi, Stella Biderman</em></p>
+<blockquote><p>Classifier-Free Guidance (CFG) has recently emerged in text-to-image generation as a lightweight technique to encourage prompt-adherence in generations. In this work, we demonstrate that CFG can be used broadly as an inference-time technique in pure language modeling. We show that CFG (1) improves the performance of Pythia, GPT-2 and LLaMA-family models across an array of tasks: Q&amp;A, reasoning, code generation, and machine translation, achieving SOTA on LAMBADA with LLaMA-7B over PaLM-540B; (2) brings improvements equivalent to a model with twice the parameter-count; (3) can stack alongside other inference-time methods like Chain-of-Thought and Self-Consistency, yielding further improvements in difficult tasks; (4) can be used to increase the faithfulness and coherence of assistants in challenging form-driven and content-driven prompts: in a human evaluation we show a 75% preference for GPT4All using CFG over baseline.</p>
 </blockquote>
 <ul>
-<li>📜 <a href="https://arxiv.org/abs/2306.17806">Read the paper</a></li>
-<li>💾 <a href="sudoer.json">Download SUDOERv1</a>, the dataset used for the GPT4All experiment.</li>
-<li>🚀 Integrated in <a href="https://github.com/apage43/mptgen">mptgen</a> (<a href="https://pbs.twimg.com/media/F0PTAOnaIAUErvt?format=jpg&amp;name=900x900">usage</a>), llama.cpp (<a href="https://github.com/ggerganov/llama.cpp/issues/2083">issue</a>, <a href="https://github.com/ggerganov/llama.cpp/pull/2135">PR</a>), <a href="https://github.com/huggingface/transformers/issues/24536">huggingface issue</a> / <a href="https://github.com/huggingface/transformers/pull/24654">huggingface PR</a>, <a href="https://github.com/turboderp/exllama/issues/129">exllama issue</a>, <a href="https://github.com/oobabooga/text-generation-webui/pull/3325#issuecomment-1664741299">oobabooga</a>, <a href="https://github.com/SillyTavern/SillyTavern/pull/905">SillyTavern</a></li>
+<li>📜 <a href="https://openreview.net/pdf?id=RiM3cl9MdK">Read the paper</a></li>
+<li>💾 <a href="https://vermeille.github.io/cfg-llm/sudoer.json">Download SUDOERv1</a>, the dataset used for the GPT4All experiment.</li>
+<li>🚀 Integrated in <a href="https://github.com/apage43/mptgen">mptgen</a> (<a href="https://pbs.twimg.com/media/F0PTAOnaIAUErvt?format=jpg&amp;name=900x900">usage</a>.), llama.cpp (<a href="https://github.com/ggerganov/llama.cpp/issues/2083">issue</a>, <a href="https://github.com/ggerganov/llama.cpp/pull/2135">PR</a>), huggingface (<a href="https://github.com/huggingface/transformers/issues/24536#issuecomment-2202861096">issue</a>, <a href="https://github.com/huggingface/transformers/pull/24654">PR</a>), exllama (<a href="https://github.com/turboderp/exllama/issues/129">issue</a>), oobabooga (<a href="https://github.com/oobabooga/text-generation-webui/pull/3325#issuecomment-1664741299">PR</a>), SillyTavern (<a href="https://github.com/SillyTavern/SillyTavern/pull/905">PR</a>)</li>
 </ul>
+<p>Quick presentation
+🐦 Read the Twitter thread</p>
+<p>For a language model prompted with prompt
+c
+, we contrast the logits with and without this prompts in order to emphasize the difference the prompt makes. Mathematically, we make a step of size $\gamma$ from the unconditioned logits to the conditioned logits. $\gamma &gt; 1$ overemphasizes the prompts and brings additional benefits.</p>
+$$ \log \hat{P}_\theta(w_i|w_{j&lt;i},c) = \log P_\theta(w_i|w_{j&lt;i}) + \gamma (\log P_\theta(w_i|w_{j&lt;i}, c) - \log P_\theta(w_i|w_{j&lt;i}))$$<p>Instead of an unconditional base, we can have a negative prompt representing what we want to walk away from.
+Also works very well with assistants.</p>
 
 </div>
 </div>
@@ -14617,191 +14607,31 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Quick-presentation">Quick presentation<a class="anchor-link" href="#Quick-presentation">&#182;</a></h1><p>🐦 Read the <a href="https://twitter.com/Vermeille_/status/1675664118500454400">Twitter thread</a></p>
-<p>For a language model prompted with prompt $c$, we contrast the logits with and without this prompts in order to emphasize the difference the prompt makes. Mathematically, we make a step of size $\gamma$ from the unconditioned logits to the conditioned logits. $\gamma&gt;1$ overemphasizes the prompts and brings additional benefits.</p>
-$$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + \gamma \big(\log P_\theta(w_i | w_{j&lt;i}, c) - \log P_\theta(w_i | w_{j&lt;i})\big)$$<ul>
-<li>The paper also proposes a way to implement CFG Rescale, allowing for higher $\gamma$ without degradation.</li>
-<li>Instead of an unconditional base, we can have a negative prompt representing what we <em>want to walk away from</em>.</li>
-<li>Also works very well with assistants.</li>
-</ul>
-
+<h1 id="Use-with-Huggingface">Use with Huggingface<a class="anchor-link" href="#Use-with-Huggingface">&#182;</a></h1>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Code">Code<a class="anchor-link" href="#Code">&#182;</a></h1><p>While the PRs are improved and getting merged, you can experiment with the <strong>simplified</strong> code below (only supports batch size 1, no attention mask, etc)</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span><span class="n">LogitsProcessor</span><span class="p">,</span> <span class="n">LogitsProcessorList</span><span class="p">,</span> <span class="n">TemperatureLogitsWarper</span><span class="p">,</span> <span class="n">TopPLogitsWarper</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-
-<span class="k">class</span> <span class="nc">CFGLogits</span><span class="p">(</span><span class="n">LogitsProcessor</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Logits processor for Classifier-Free Guidance (CFG). The processors</span>
-<span class="sd">    computes a weighted average across scores from prompt conditional and prompt unconditional (or negative) logits,</span>
-<span class="sd">    parameterized by the `guidance_scale`. The unconditional scores are computed internally by prompting `model` with</span>
-<span class="sd">    the `uncond` branch. Finally, according to CFG Rescale, the reweighted logits are interpolated back with weight</span>
-<span class="sd">    `rescale_factor` the conditional ones to smooth the effect and increase output quality.</span>
-
-<span class="sd">    See [the paper](https://arxiv.org/abs/2306.17806) for more information.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        guidance_scale (float):</span>
-<span class="sd">            The guidance scale for classifier free guidance (CFG). CFG is enabled by setting `guidance_scale &gt; 1`.</span>
-<span class="sd">            Higher guidance scale encourages the model to generate samples that are more closely linked to the input</span>
-<span class="sd">            prompt, usually at the expense of poorer quality.</span>
-<span class="sd">        uncond (`torch.LongTensor` of shape `(batch_size, sequence_length)`):</span>
-<span class="sd">            Indices of input sequence tokens in the vocabulary for the unconditional branch.</span>
-<span class="sd">        model:</span>
-<span class="sd">            The LM computing the unconditional scores. Supposedly the same as the one computing the conditional scores.</span>
-<span class="sd">            Both models must use the same tokenizer.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guidance_scale</span><span class="p">,</span> <span class="n">uncond</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">guidance_scale</span> <span class="o">=</span> <span class="n">guidance_scale</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">uncond</span> <span class="o">=</span> <span class="n">uncond</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_ids</span><span class="p">,</span> <span class="n">scores</span><span class="p">):</span>
-        <span class="n">scores</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">guidance_scale</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">scores</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uncond</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span>
-                <span class="n">input_ids</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">:],</span>
-                <span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">past_key_values</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">past_key_values</span><span class="p">,</span>
-            <span class="p">)</span>
-        <span class="n">unconditional_logits</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">logits</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">guidance_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">scores</span> <span class="o">-</span> <span class="n">unconditional_logits</span><span class="p">)</span> <span class="o">+</span> <span class="n">unconditional_logits</span>
-        <span class="k">return</span> <span class="n">out</span>
-        
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;gpt2-medium&quot;</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;gpt2-medium&quot;</span><span class="p">)</span>
-<span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda:0&#39;</span>
-<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">();</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">neg_prompt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">prompt</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">neg_prompt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># either provide a negative prompt:</span>
-        <span class="n">neg_prompt</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">neg_prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># or just use the last token of the prompt</span>
-        <span class="n">neg_prompt</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">][:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
-
-    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
-        <span class="n">input_ids</span><span class="o">=</span><span class="n">prompt</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
-        <span class="n">attention_mask</span><span class="o">=</span><span class="n">prompt</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
-        <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">125</span><span class="p">,</span>
-        <span class="n">logits_processor</span><span class="o">=</span><span class="n">LogitsProcessorList</span><span class="p">([</span>
-            <span class="c1"># inputs_cfg usually is the last token of the prompt but there are</span>
-            <span class="c1"># possibilities of negative prompting that are explored in the paper</span>
-            <span class="n">CFGLogits</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">neg_prompt</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">model</span><span class="p">),</span>
-            <span class="n">TemperatureLogitsWarper</span><span class="p">(</span><span class="mf">0.8</span><span class="p">),</span>
-            <span class="n">TopPLogitsWarper</span><span class="p">(</span><span class="mf">0.95</span><span class="p">),</span>
-        <span class="p">]),</span>
-        <span class="n">top_k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Examples">Examples<a class="anchor-link" href="#Examples">&#182;</a></h1><h2 id="Vanilla">Vanilla<a class="anchor-link" href="#Vanilla">&#182;</a></h2><p>First, let's get a bunch of standard generations</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">vanilla</span><span class="p">(</span><span class="n">prompt</span><span class="p">):</span>
-    <span class="n">prompt</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
-    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
-        <span class="n">input_ids</span><span class="o">=</span><span class="n">prompt</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
-        <span class="n">attention_mask</span><span class="o">=</span><span class="n">prompt</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span>
-        <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">125</span><span class="p">,</span>
-        <span class="n">logits_processor</span><span class="o">=</span><span class="n">LogitsProcessorList</span><span class="p">([</span>
-            <span class="n">TemperatureLogitsWarper</span><span class="p">(</span><span class="mf">0.8</span><span class="p">),</span>
-            <span class="n">TopPLogitsWarper</span><span class="p">(</span><span class="mf">0.95</span><span class="p">),</span>
-        <span class="p">]),</span>
-        <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">vanilla</span><span class="p">(</span><span class="s2">&quot;Today a dragon flew over Paris, France,&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=============&#39;</span><span class="p">)</span>
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForCausalLM</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"gpt2"</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"gpt2"</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">generation_config</span><span class="o">.</span><span class="n">pad_token_id</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token_id</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">([</span><span class="s2">"Today, a dragon flew over Paris, France,"</span><span class="p">],</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">"pt"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'--'</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="c1"># CFG parameters</span>
+        <span class="n">inputs</span><span class="p">[</span><span class="s2">"input_ids"</span><span class="p">],</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">inputs</span><span class="p">[</span><span class="s1">'attention_mask'</span><span class="p">],</span> <span class="n">guidance_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+        <span class="c1"># sampling parameters</span>
+        <span class="n">top_p</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">125</span><span class="p">,</span> <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14815,68 +14645,30 @@ $$\log \widehat{P_\theta}(w_i|w_{j&lt;i},c) = \log P_\theta(w_i | w_{j&lt;i}) + 
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, in a thunderous crash.
+<pre>--
+Today, a dragon flew over Paris, France, and struck one person. The victim was an American, who was suffering from depression, according to the Associated Press. &#34;It&#39;s not that the dragon is attacking America – it&#39;s that the attack was of an American,&#34; said a Paris native and former firefighter who lived in London. &#34;It was a very scary thing.&#34;
 
-The crash of a black dragon in Paris was one of the largest in history.
+In the days leading up to the attack, a number of people in the U.S. rushed to Paris to tell their stories. In the U.K., in response to a demand for photos, local authorities held an event that attracted a fair amount of attention. In France, the same
+--
+Today, a dragon flew over Paris, France, killing at least 80 people. That dragon is likely to be named Chirac, after French National Dragon, and its name is likely to be similar to the one used in France&#39;s infamous &#34;Camel of the Day&#34; attack on Paris in December 1963.
 
-A black dragon crashed into the city of Paris today, according to eyewitnesses.
+Chirac, also known as &#34;The Dragon of France,&#34; was a massive, dragon-shaped dragon, which is still associated with Paris&#39; famous French cuisine, particularly &#34;Hac de Chirac.&#34;
 
-The black dragon crashed through an apartment block, knocked out windows and a restaurant and into a wall. The dragon was estimated to be about 30 feet long.
+In France, there are two types of Chirac, which are referred to as the &#34;Hac du Chirac&#34; and
+--
+Today, a dragon flew over Paris, France, in August 2013 and attacked a wedding of Jean-Claude Juncker and Emmanuel Macron, both of whom were running for President of the EU. The dragon was said to have come down the runway to give off a large flame, which burned for eight minutes before it was finally extinguished. France, meanwhile, is undergoing an evacuation.
 
-Several people who witnessed the crash told ABC News that the dragon looked like it belonged in a movie.
+More from GlobalPost:
 
-&#34;I saw it in the middle of the block and it was flying around me,&#34; a witness told ABC News. &#34;I ran
-=============
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, from the mountains near Calais. It was an impressive feat in a world that is full of dragons. &#34;That&#39;s a dragon flying over my head!&#34; shouted one passenger who saw the dragon during the flight. Another rider told us that he saw the dragon soar over the roofs of Paris buildings.
-
-We talked to a French dragon expert and his conclusion was: &#34;You don&#39;t really need to worry about such flying dragons. They are just sitting there at the top of the world.&#34;
-
-The dragon flying over a building was an interesting sight, and it&#39;s a sight that many of us would never experience. We live
-=============
-Today a dragon flew over Paris, France, landing in the center of the city with its tail swept up and a beak raised. The dragon was a large dark dragon, not much larger than a man, in coloration unknown to most people of her age. She had a short sword in her hand.
-
-The dragon made no sound, and instead looked to be in a deep trance, as if she was still in sleep. She lowered her sword and looked up at the sky, for a moment then let her sword disappear and turned her attention to Kaze.
-
-&#34;Kaze!&#34;
-
-She turned around, looking at him with fear and the
-=============
+&#39;This isn&#39;t just for Trump&#39;: The future of a &#39;good idea&#39; in Paris
 </pre>
 </div>
 </div>
@@ -14892,7 +14684,7 @@ She turned around, looking at him with fear and the
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Using-CFG">Using CFG<a class="anchor-link" href="#Using-CFG">&#182;</a></h2><p>We should notice the text focusing more on the prompt, and show less divergence.</p>
+<h1 id="Negative-prompting">Negative prompting<a class="anchor-link" href="#Negative-prompting">&#182;</a></h1><p>That's a lot of poor cheeseland people being killed. We can change that with negative prompting</p>
 
 </div>
 </div>
@@ -14902,12 +14694,20 @@ She turned around, looking at him with fear and the
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;Today a dragon flew over Paris, France,&quot;</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;========&#39;</span><span class="p">)</span>
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># with a negative prompt</span>
+<span class="n">neg_inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">([</span><span class="s2">"killing,"</span><span class="p">],</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">"pt"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'--'</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="c1"># CFG</span>
+        <span class="n">inputs</span><span class="p">[</span><span class="s2">"input_ids"</span><span class="p">],</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">inputs</span><span class="p">[</span><span class="s1">'attention_mask'</span><span class="p">],</span> <span class="n">guidance_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+        <span class="n">negative_prompt_ids</span><span class="o">=</span><span class="n">neg_inputs</span><span class="p">[</span><span class="s1">'input_ids'</span><span class="p">],</span>
+        <span class="c1"># sampling parameters</span>
+        <span class="n">top_p</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">125</span><span class="p">,</span> <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14921,78 +14721,44 @@ She turned around, looking at him with fear and the
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
 <div class="jp-OutputArea-child">
+
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, killing everyone and everything in its wake. It was called the Batangue dragon and it flew over Paris to kill everyone and everything in its path. This particular bird was named the Batangue-Risoule (Bato-Risoule) and it was the worst thing to happen to Paris in years.
+<pre>--
+Today, a dragon flew over Paris, France, where dozens of firefighters from France&#39;s National Disaster Response Centre were helping to restore the city&#39;s famous French cathedral from a falling snowstorm to its perfect new condition.
 
-Risen from the depths of the Earth, the Batangue dragon suddenly made its way to Paris. It&#39;s power of flight completely overwhelmed the defense of the city.
+Advertisement
 
-With such immense power at its disposal the Batangue dragon made a path of destruction for all of Paris
-========
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+Video courtesy of CTV
+
+Advertisement
+
+In New York City, the city council passed a resolution Friday asking for some more funds to help restore the famed French cathedral after the snow storm. The measure was called &#34;Operation Tenderloin&#34; because the city did not immediately respond to requests for more money.
+
+UPDATE: A CTV crew spotted the dragon in the sky above New York and called police. It was soon spotted
+--
+Today, a dragon flew over Paris, France, on Sunday to fly into the skies over Paris on Thursday.
+
+The dragon is the second such dragon to land in France this year as it flew through the city after a previous one.
+
+In October, an unidentified plane flew over Paris and crashed in the town of Bordeaux on a routine flight. It&#39;s not yet clear when the plane&#39;s pilots thought it might land.
+
+The second such dragon is believed to have landed in northern Turkey on Tuesday, with at least one possible plane crash involving a person.
+
+Last week, in February 2017, a helicopter flew over the French capital and a second
+--
+Today, a dragon flew over Paris, France, just after midnight (5pm GMT). The dragon was seen at a location just off Paris Boulevard. A man and a young girl were also detained for flying over Paris on Saturday. The person was arrested.
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+As of yet, there are no reports of a missing persons case in the country.
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, killing a lot of Parisians and sending panic through Paris&#39; streets.
-
-Dragon sightings are common all over the world. In Australia, they are usually seen flying over Sydney, Australia.
-
-A dragon flew over Paris, France, killing a lot of Parisians and sending panic through Paris&#39; streets.
-
-When the dragon landed, it sent a giant fireball over the city, but not before it had killed a number of people.
-
-The news of the death of the dragon spread across the world, with many celebrities reaching out to offer their prayers for the human being in the incident.
-
-Elle
-========
-Today a dragon flew over Paris, France, killing all its passengers. These dragons were created by scientists at NASA.
-
-11/1/94
-
-The White House announced the creation of a multinational coalition of scientists and engineers to create a computer program to protect civilians from nuclear attacks.
-
-11/3/94
-
-Iran&#39;s Air Force has begun testing the Islamic-type ballistic missile &#34;Mustafar&#34;, which is capable of flying at speeds up to Mach 6.
-
-11/9/94
-
-The first model of a missile designed to destroy satellites has been built.
-
-11/16/94
-
-The first aircraft built by
-========
+The situation on the ground has remained tense for a while, and the weather has been erratic (due to all the storms, storms, flooding, storms and high winds, etc.) The situation is still in a bit of a panic, because it would have been easy for any one of the following scenarios to go from
 </pre>
 </div>
 </div>
@@ -15008,225 +14774,15 @@ The first aircraft built by
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Negative-prompting">Negative prompting<a class="anchor-link" href="#Negative-prompting">&#182;</a></h2><p>That's way too many dead people. Let's have our dragon not kill anyone.</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;Today a dragon flew over Paris, France,&quot;</span><span class="p">,</span> <span class="s2">&quot; killing,&quot;</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=====&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, descending over the French capital from the sky. A dragon!? Where were those who came to Paris to pay tribute to dragons?
-
-With the dragons appearing over Paris, there were rumors that there were dragons flying over a city.
-
-Someone who had paid tribute to dragons in Beijing, China, had said that they came to pay tribute to dragons.
-
-The dragon flew over Paris, France, descending over the French capital from the sky. A dragon!? Where were those who came to Paris to pay tribute to dragons mathemat?
-
-A dragon?
-
-Nobody was paying tribute to dragons.
-
-The dragon
-=====
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, in August 1774. It flew over Paris for about twenty seconds before returning to France. The dragon was named Bonaparte. Some sources claim that he died and Bonaparte was succeeded by Charles X. Some sources say that Bonaparte died and was succeeded by his brother Louis, but this is not correct and Bonaparte was succeeded by his brother Louis at the time of the French Revolution.
-
-Sources from the modern era say that Bonaparte died of fever on July 2, 1773 in his bedroom. He was near death. He died about ten days before the French Revolution started. He died four
-=====
-Today a dragon flew over Paris, France, landing beside my house, wearing a golden crown. The dragon took up a position beside Paris Cathedral, and began a singing tour that took us all over the city.
-
-Tonight a dragon flew over Paris, France, landing beside my house, wearing a golden crown. The dragon took up a position beside Paris Cathedral, and began a singing tour that took us all over the city.
-
-Tonight a dragon flew over Paris, France, landing beside my house, wearing a golden crown. The dragon took up a position beside Paris Cathedral, and began a singing tour that took us all over the city.
-
-Today a
-=====
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>And keep our buildings safe!</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;Today a dragon flew over Paris, France,&quot;</span><span class="p">,</span> <span class="s2">&quot; killing people and crashing into buildings,&quot;</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;======&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, shortly before midnight. It swooped down to the Paris Opera House, and grabbed a puppet. With a mighty roar it leapt off the roof and smashed the puppet into pieces. A crowd was stunned and cried out in terror as the dragon flew off.
-
-Then all was silent as for the next few hours it remained at the Opera House. No one knew what had just happened.
-
-At about 4:00 AM in the morning a man walked into the Opera House to look at the puppet. That man, however, was not the Dragon, but a man named Le Clos.
-
-Le Clos entered
-======
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Today a dragon flew over Paris, France, on Saturday, flying slowly and carrying a golden crown. It landed on a street full of tourists, and made a proclamation: Dragons will fly over Paris again today.
-
-It was a fairly large dragon, but it didn&#39;t fly high above the Paris skyline. The dragon landed on the Rue de la Liberté, a busy street, and issued an invitation to tourists to come to the scene of its arrival.
-
-The people of Paris took it well, and tourists were able to come to the dragon&#39;s home and feed the dragon, which it then flew away, as usual.
-
-The Dragon Who Came
-======
-Today a dragon flew over Paris, France, October 13, 1814 and dropped a golden orb upon Paris! After a few moments, an eclipse of the moon was visible on the sky. Paris was completely covered with the golden orb.
-
-
-The dragon flew for 1/25th of a second. It was then seen by another man and a couple of spectators. This time a lot more people were present and it was reported that the number of people who watched the eclipse was up to 300.
-
-
-On October 15, 1814, a bird flew over Paris, France, October 17, 1814 and dropped a golden orb upon Paris! After a few moments
-======
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Cite">Cite<a class="anchor-link" href="#Cite">&#182;</a></h1><pre><code>@misc{sanchez2023stay,
-      title={Stay on topic with Classifier-Free Guidance}, 
+<h1 id="Cite">Cite<a class="anchor-link" href="#Cite">&#182;</a></h1>
+<pre><code>@misc{sanchez2023stay,
+      title={Stay on topic with Classifier-Free Guidance},
       author={Guillaume Sanchez and Honglu Fan and Alexander Spangher and Elad Levi and Pawan Sasanka Ammanamanchi and Stella Biderman},
       year={2023},
       eprint={2306.17806},
       archivePrefix={arXiv},
       primaryClass={cs.CL}
-}
-</code></pre>
+}</code></pre>
 
 </div>
 </div>
